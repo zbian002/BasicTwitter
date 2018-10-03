@@ -111,14 +111,11 @@
                                 <action selector="logout:" destination="BYZ-38-t0r" id="fNg-tu-NCv"/>
                             </connections>
                         </barButtonItem>
-                        <rightBarButtonItems>
-                            <barButtonItem title="Post" id="TSw-wk-96D">
-                                <connections>
-                                    <segue destination="9Qc-mt-xTU" kind="presentation" id="CZa-Er-3C5"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Search" id="oeO-Ix-1HD"/>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" title="Post" id="TSw-wk-96D">
+                            <connections>
+                                <segue destination="9Qc-mt-xTU" kind="presentation" id="CZa-Er-3C5"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="baO-jw-Ocs" id="AIp-F6-UuX"/>

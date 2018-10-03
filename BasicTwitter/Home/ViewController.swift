@@ -94,15 +94,11 @@ extension ViewController: UITableViewDataSource {
             return
         }
         if likesArray.contains(currentUsername!) {
-            
-            //Helper.shared.showOKAlert(title: "Not Allowed", message: "You cannot like a message multiple times.", viewController: self)
-            
+            Helper.shared.showOKAlert(title: "Not Allowed", message: "You cannot like a message multiple times.", viewController: self)
             return
         }
-        
-        //likesArray.append(currentUsername!)
-        //messageObj["likes"] = likesArray
-        
+        likesArray.append(currentUsername!)
+        messageObj["likes"] = likesArray
         messageObj.addUniqueObject(currentUsername!, forKey: "likes")
         messageObj.saveInBackground { (succeed, error) in
             self.tableView.reloadData()
@@ -114,7 +110,6 @@ extension ViewController: UITableViewDataSource {
         selectedObjectFromHome = messages[sender.tag]
         performSegue(withIdentifier: "comments", sender: self)
     }
-    
 }
 
 
