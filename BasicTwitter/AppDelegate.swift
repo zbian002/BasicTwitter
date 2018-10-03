@@ -14,32 +14,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         let configuration = ParseClientConfiguration {
-            $0.applicationId = "dXjjmpippv6e7xn454EqwIGmXZdVP1bySz8VVtZ5"
+            $0.applicationId = "31BmKFcXnOSFM67w0kT05BehuKdf186DD5o"
             $0.clientKey = ""
-            $0.server = "https://basictwitter.herokuapp.com/parse"
+            $0.server = "http://cyprinoid.herokuapp.com/parse"
         }
         Parse.initialize(with: configuration)
         
         //check if the user is currently logged in
         if PFUser.current() == nil{
-            
             let storyboard = UIStoryboard(name: "Login", bundle: nil)
-            
             let vc = storyboard.instantiateViewController(withIdentifier: "login")
-            
             window?.rootViewController = vc
-            
-        }else{
-            
+        }
+        else{
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "home")
             window?.rootViewController = vc
         }
-        
         return true
     }
 

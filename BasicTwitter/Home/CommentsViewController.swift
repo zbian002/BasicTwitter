@@ -20,26 +20,19 @@ class CommentsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         tableView.dataSource = self
         commentsArray = selectedObject?["comments"] as? [String] ?? [String]()
     }
 
     @IBAction func comment(_ sender: Any) {
-        
-        if commentTf.text?.characters.count == 0{
-            
+        if commentTf.text?.count == 0{
             Helper.shared.showOKAlert(title: "Error", message: "Please type some comments to continue", viewController: self)
-            
             return
         }
-        
         let comment = commentTf.text!
         selectedObject?.add(comment, forKey: "comments")
         selectedObject?.saveInBackground(block: { (succeed, error) in
-            
-            if succeed{
-                
+            if succeed {
                 self.commentsArray.append(comment)
                 self.commentTf.text = ""
                 self.tableView.reloadData()
@@ -48,31 +41,22 @@ class CommentsViewController: UIViewController {
     }
     
     @IBAction func flag(_ sender: Any) {
-        
-        if let selectedObject = selectedObject{
-            
+        if let selectedObject = selectedObject {
             selectedObject.incrementKey("flagged")
             selectedObject.saveInBackground()
         }
     }
-    
 }
 
-extension CommentsViewController: UITableViewDataSource{
+extension CommentsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath)
-        
         let eachComment = commentsArray[indexPath.row]
-        
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.text = eachComment
-        
         return cell
     }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return commentsArray.count
     }
 }

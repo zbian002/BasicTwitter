@@ -10,44 +10,30 @@ import UIKit
 import Parse
 
 class PostViewController: UIViewController {
-
     @IBOutlet weak var messageTextview: UITextView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         messageTextview.becomeFirstResponder()
-        // Do any additional setup after loading the view.
     }
 
     @IBAction func close(_ sender: Any) {
-        
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func post(_ sender: Any) {
-        
-        if messageTextview.text.characters.count == 0{
-            
+        if messageTextview.text.count == 0 {
             Helper.shared.showOKAlert(title: "Required", message: "Please type some message in order to continue", viewController: self)
-            
             return
         }
-        
         let messageObj = PFObject(className: "Messages")
         messageObj["sender"] = PFUser.current()?.username!
         messageObj["message"] = messageTextview.text
         messageObj["likes"] = [String]()
         messageObj["comments"] = [String]()
         messageObj["flagged"] = 0
-        
         messageObj.saveInBackground { (succeed, error) in
-            
             self.messageTextview.text = ""
             Helper.shared.showOKAlert(title: "Shared", message: "Your message was shared successfully", viewController: self)
         }
-        
     }
-    
-
 }

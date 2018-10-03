@@ -12,35 +12,26 @@ import Parse
 class LoginViewController: UIViewController {
 
     @IBOutlet weak var usernameTf: UITextField!
-    
     @IBOutlet weak var passwordTf: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
     }
 
     @IBAction func login(_ sender: Any) {
-        
         guard let username = usernameTf.text, let password = passwordTf.text else { return }
-        
         PFUser.logInWithUsername(inBackground: username, password: password) { (user, error) in
-            
-            if error == nil{
-                
+            if error == nil {
                 Helper.shared.switchStoryboard(storyboardName: "Main", identifier: "home")
-            }else{
-                
+            }
+            else {
                 Helper.shared.showOKAlert(title: "Error", message: (error?.localizedDescription)!, viewController: self)
             }
         }
     }
     
     @IBAction func close(_ sender: Any) {
-        
         dismiss(animated: true, completion: nil)
     }
-    
 }
